@@ -8,6 +8,7 @@ class player
 protected:
 	int playerNum;
 public:
+	player();
 	player(int num);
 	bool fill_grid(int pos, grid& darray);
 	int getPlayerNum();

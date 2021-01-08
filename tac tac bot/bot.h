@@ -1,9 +1,13 @@
 #ifndef BOT_H
 #define BOT_H
 
-class bot
+#include "player.h"
+
+class bot : public player
 {
-
-
+public:
+	bot();
+	bot(int num);
+	int minimax(grid& darray);
 };
 #endif

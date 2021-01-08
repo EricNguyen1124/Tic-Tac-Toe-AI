@@ -2,6 +2,11 @@
 #include <iostream>
 using namespace std;
 
+player::player()
+{
+	playerNum = 0;
+}
+
 player::player(int num)
 {
 	playerNum = num;

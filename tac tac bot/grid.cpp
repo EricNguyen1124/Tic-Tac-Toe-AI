@@ -38,17 +38,21 @@ void grid::print()
 	cout << endl;
 }
 
-bool grid::check()
+int grid::check()
 {
-	if (check_hor() || check_ver() || check_dia())
-		return true;
+	int temp[3] = { check_hor(), check_ver(), check_dia()};
+	for (int i = 0; i < 3; i++)
+		if (temp[i] != -2)
+			return temp[i];
+	return -2;
 }
 
-bool grid::check_hor()
+int grid::check_hor()
 {
 	bool same = false;
 	bool horNoMatch;
 	int first;
+	int winner = -2;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -63,16 +67,22 @@ bool grid::check_hor()
 		}
 
 		if (horNoMatch == false)
+		{
 			same = true;
+			winner = first;
+		}
+			
 	}
-	return same;
+	return winner;
 }
 
-bool grid::check_ver()
+int grid::check_ver()
 {
 	bool same = false;
 	bool verNoMatch;
 	int first;
+	int winner = -2;
+
 	for (int i = 0; i < 3; i++)
 	{
 		verNoMatch = false;
@@ -86,30 +96,42 @@ bool grid::check_ver()
 		}
 
 		if (verNoMatch == false)
+		{
 			same = true;
+			winner = first;
+		}
+			
 	}
-	return same;
+	return winner;
 }
 
-bool grid::check_dia()
+int grid::check_dia()
 {
 	bool same = false;
 	int first;
+	int winner = -2;
 
 	first = values[0];
 	if (first != 0)
 	{
 		if (first == values[4] && first == values[8])
+		{
 			same = true;
+			winner = first;
+		}
 	}
 	
 	first = values[2];
 	if (first != 0)
 	{
 		if (first == values[4] && first == values[6])
+		{
 			same = true;
+			winner = first;
+		}
+			
 	}
-	return same;
+	return winner;
 }
 
 bool grid::fill_value(int player, int pos)
@@ -120,4 +142,9 @@ bool grid::fill_value(int player, int pos)
 		return true;
 	}
 	return false;
+}
+
+int* grid::getArray()
+{
+	return values;
 }

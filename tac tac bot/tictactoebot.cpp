@@ -1,6 +1,7 @@
 #include <iostream>
 #include "grid.h"
 #include "player.h"
+#include "bot.h"
 using namespace std;
 
 int main()
@@ -16,7 +17,7 @@ int main()
     // I should also make it so that it is random if you get player 1 or 2
 
     gameGrid.print();
-
+    /*
     while (!gameGrid.check())
     {
         valid = true;
@@ -45,6 +46,13 @@ int main()
             gameGrid.print();
         } while (!valid);
     }
+    */
+
+    int john[9] = {2,2,2,1,0,2,2,0,2};
+    grid jimmy(john);
+    grid jog;
+    jog.print();
+    cout<<jimmy.check();
 
     return 0;
 }
