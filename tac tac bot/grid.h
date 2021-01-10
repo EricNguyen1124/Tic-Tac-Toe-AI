@@ -3,7 +3,7 @@
 
 class grid
 {
-private:
+protected:
 	int values[9]; // Array of nine integers, 0 is blank, 1 is X, 2 is O
 public:
 	grid();

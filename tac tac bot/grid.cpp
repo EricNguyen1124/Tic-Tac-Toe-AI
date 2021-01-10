@@ -35,7 +35,7 @@ void grid::print()
 			cout << endl;
 		}
 	}
-	cout << endl;
+	cout << endl << endl;
 }
 
 int grid::check()

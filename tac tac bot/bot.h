@@ -8,6 +8,6 @@ class bot : public player
 public:
 	bot();
 	bot(int num);
-	int minimax(grid& darray);
+	int minimax(grid darray, bool maximizing);
 };
 #endif

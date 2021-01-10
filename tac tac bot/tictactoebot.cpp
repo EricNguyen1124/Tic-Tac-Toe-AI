@@ -13,7 +13,6 @@ int main()
     int tempPos;
     bool valid;
 
-    // I'll need to make a new BOT class that can figure out the next best tempPos for the player
     // I should also make it so that it is random if you get player 1 or 2
 
     gameGrid.print();
@@ -48,11 +47,11 @@ int main()
     }
     */
 
-    int john[9] = {2,2,2,1,0,2,2,0,2};
+    int john[9] = {0,0,0,0,0,0,0,0,0};
     grid jimmy(john);
-    grid jog;
-    jog.print();
-    cout<<jimmy.check();
+    jimmy.print();
+    bot god;
+    cout << god.minimax(jimmy, true);
 
     return 0;
 }

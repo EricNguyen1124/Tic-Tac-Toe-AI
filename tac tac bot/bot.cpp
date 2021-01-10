@@ -1,5 +1,6 @@
 #include "bot.h"
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 bot::bot()
@@ -13,8 +14,7 @@ bot::bot(int num)
 }
 
 
-int bot::minimax(grid& darray)
+int bot::minimax(grid darray, bool maximizing)
 {
 
-	return 0;
 }
