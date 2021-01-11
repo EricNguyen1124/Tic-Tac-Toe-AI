@@ -10,9 +10,6 @@ int main()
     player player1(1);
     player player2(2);
 
-    int tempPos;
-    bool valid;
-
     // I should also make it so that it is random if you get player 1 or 2
 
     gameGrid.print();
@@ -47,11 +44,11 @@ int main()
     }
     */
 
-    int john[9] = {0,0,0,0,0,0,0,0,0};
+    int john[9] = {2,1,2,1,2,1,1,2,1};
     grid jimmy(john);
     jimmy.print();
     bot god;
-    cout << god.minimax(jimmy, true);
+    cout << jimmy.check();
 
     return 0;
 }

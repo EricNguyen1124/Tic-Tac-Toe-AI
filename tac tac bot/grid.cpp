@@ -40,10 +40,24 @@ void grid::print()
 
 int grid::check()
 {
+	bool noDraw = false;
+
 	int temp[3] = { check_hor(), check_ver(), check_dia()};
 	for (int i = 0; i < 3; i++)
 		if (temp[i] != -2)
 			return temp[i];
+
+	for (int i = 0; i < 9; i++)
+	{
+		if (values[i] == 0)
+		{
+			noDraw = true;
+		}
+	}
+
+	if (!noDraw)
+		return 0;
+
 	return -2;
 }
 
