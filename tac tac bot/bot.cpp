@@ -17,10 +17,11 @@ bot::bot(int num)
 int bot::minimax(grid darray, bool maximizing)
 {
 	int temp = darray.check();
-	int blanks[9] = { 0,0,0,0,0,0,0,0,0 };
 	int blanksNum = 0;
-	grid* scores;
-	
+	int numPossibles = 0;
+	grid* possibles;
+	int* scores;
+
 	if (temp == 1)
 		return 1;
 	else if (temp == 2)
@@ -32,32 +33,63 @@ int bot::minimax(grid darray, bool maximizing)
 	{
 		if (darray.getArray()[i] == 0)
 		{
-			blanks[i] = 1;
 			blanksNum++;
 		}
 	}
 
-	scores = new grid[blanksNum];
-
+	possibles = new grid[blanksNum];
+	scores = new int[blanksNum];
+	
 	if (maximizing)
 	{
 		for (int i = 0; i < 9; i++)
 		{
 			if (darray.getArray()[i] == 0)
 			{
-
+				darray.fill_value(1, i);
+				possibles[numPossibles].copy_array(darray.getArray());
+				darray.getArray()[i] = 0;
+				numPossibles++;
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			if (darray.getArray()[i] == 0)
+			{
+				darray.fill_value(2, i);
+				possibles[numPossibles].copy_array(darray.getArray());
+				darray.getArray()[i] = 0;
+				numPossibles++;
 			}
 		}
 	}
 
-	return -2;
+	if (maximizing)
+	{
+		for (int i = 0; i < blanksNum; i++)
+		{
+			scores[i] = minimax(possibles[i], false);
+		}
+		return scores[findMax(scores, blanksNum)];
+	}
+	else
+	{
+		for (int i = 0; i < blanksNum; i++)
+		{
+			scores[i] = minimax(possibles[i], true);
+		}
+		return scores[findMin(scores, blanksNum)];
+	}
 }
 
-int bot::findMax(int arr[])
+int bot::findMax(int arr[], int num)
 {
 	int max = -99;
 	int maxInd;
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < num; i++)
 		if (max < arr[i])
 		{
 			max = arr[i];
@@ -67,11 +99,11 @@ int bot::findMax(int arr[])
 	return maxInd;
 }
 
-int bot::findMin(int arr[])
+int bot::findMin(int arr[], int num)
 {
 	int min = 99;
 	int minInd;
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < num; i++)
 		if (min > arr[i])
 		{
 			min = arr[i];

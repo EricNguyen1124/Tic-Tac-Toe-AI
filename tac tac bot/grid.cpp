@@ -162,3 +162,9 @@ int* grid::getArray()
 {
 	return values;
 }
+
+void grid::copy_array(int arr[])
+{
+	for (int i = 0; i < 9; i++)
+		values[i] = arr[i];
+}

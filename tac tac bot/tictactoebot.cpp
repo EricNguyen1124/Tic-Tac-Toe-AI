@@ -10,9 +10,6 @@ int main()
     player player1(1);
     player player2(2);
 
-    // I should also make it so that it is random if you get player 1 or 2
-
-    gameGrid.print();
     /*
     while (!gameGrid.check())
     {
@@ -44,11 +41,11 @@ int main()
     }
     */
 
-    int john[9] = {2,1,2,1,2,1,1,2,1};
+    int john[9] = {2,0,1,1,0,0,1,2,2};
     grid jimmy(john);
     jimmy.print();
     bot god;
-    cout << jimmy.check();
+    cout<<god.minimax(jimmy,true);
 
     return 0;
 }

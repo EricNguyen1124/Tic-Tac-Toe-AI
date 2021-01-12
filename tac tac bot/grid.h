@@ -14,6 +14,7 @@ public:
 	int check_ver(); // Checks all columns for 3 matching values
 	int check_dia(); // Checks all diagonals for 3 matching values
 	bool fill_value(int player, int pos); // Fills in a square. Returns true if filled in successfully, false otherwise.
+	void copy_array(int arr[]);
 	int* getArray();
 };
 

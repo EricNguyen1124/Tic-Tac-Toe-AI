@@ -10,7 +10,7 @@ public:
 	bot();
 	bot(int num);
 	int minimax(grid darray, bool maximizing);
-	int findMax(int arr[]);
-	int findMin(int arr[]);
+	int findMax(int arr[], int num);
+	int findMin(int arr[], int num);
 };
 #endif
