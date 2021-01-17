@@ -6,57 +6,45 @@ using namespace std;
 
 int main()
 {
-    grid gameGrid;
-    player player1(1);
-    player player2(2);
+    grid gameGrid; 
+    player player1(1); // Makes a player object with playerNum = 1 (X)
+    bot playercpu; // This is the bot
 
-    /*
-    while (!gameGrid.check())
+    int tempPos;
+ 
+    gameGrid.print(); // Prints out a blank grid
+
+    while (gameGrid.check() == -2) // Main game loop
     {
-        valid = true;
-        do
+        do 
         {
             cout << "Player 1 please enter in a position: ";
             cin >> tempPos;
-            if (!player1.fill_grid(tempPos, gameGrid))
-                valid = false;
-            else
-                valid = true;
             gameGrid.print();
-        } while (!valid);
+        } while (!player1.fill_grid(tempPos, gameGrid)); // Checks if player entered a valid position
         
-        if (gameGrid.check())
+        if (gameGrid.check() != -2) // Breaks game loop if grid has a winner or draw.
             break;
 
-        do
-        {
-            cout << "Player 2 please enter in a position: ";
-            cin >> tempPos;
-            if (!player2.fill_grid(tempPos, gameGrid))
-                valid = false;
-            else
-                valid = true;
-            gameGrid.print();
-        } while (!valid);
+        playercpu.setPlayerNum(2); // Sets bot's playerNum to 2 (O).
+        playercpu.fill_grid(playercpu.findMoveO(gameGrid), gameGrid); // Bot fills in gameGrid with its best move using inherited fill_grid() function from player class.
+        gameGrid.print();
     }
-    */
 
-    int john[9] = {2,0,1,1,0,0,1,2,2};
-    grid jimmy(john);
-    jimmy.print();
-    bot god;
-    cout<<god.minimax(jimmy,true);
+    int temp = gameGrid.check(); // Figure out who won (or draw) once main game loop is broken. 
+
+    if (temp == 1)
+    {
+        cout << "X wins!" << endl;
+    }
+    else if (temp == 2)
+    {
+        cout << "O wins!" << endl;
+    }
+    else if (temp == 0)
+    {
+        cout << "It's a tie!" << endl;
+    }
 
     return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

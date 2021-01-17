@@ -16,8 +16,8 @@ bool player::fill_grid(int pos, grid& darray)
 {
 	if (darray.fill_value(playerNum, pos))
 	{
-		cout << "Player: " << playerNum << " filled in an ";
-		if (playerNum == 1)
+		cout << "Player: " << playerNum << " filled in an "; 
+		if (playerNum == 1) 
 			cout << "X";
 		else
 			cout << "O";
@@ -36,4 +36,9 @@ bool player::fill_grid(int pos, grid& darray)
 int player::getPlayerNum()
 {
 	return playerNum;
+}
+
+void player::setPlayerNum(int num)
+{
+	playerNum = num;
 }

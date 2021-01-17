@@ -5,12 +5,11 @@
 
 class bot : public player
 {
-
 public:
 	bot();
 	bot(int num);
-	int minimax(grid darray, bool maximizing);
-	int findMax(int arr[], int num);
-	int findMin(int arr[], int num);
+	int minimax(grid darray, bool maximizing); // Minimax algorithm
+	int findMoveX(grid darray); // Calls minimax algorithm on all empty positions on grid. Returns best move for X.
+	int findMoveO(grid darray); // Same as findMoveX. Returns best move for O.
 };
 #endif

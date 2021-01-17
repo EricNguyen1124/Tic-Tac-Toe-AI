@@ -17,98 +17,97 @@ bot::bot(int num)
 int bot::minimax(grid darray, bool maximizing)
 {
 	int temp = darray.check();
-	int blanksNum = 0;
-	int numPossibles = 0;
-	grid* possibles;
-	int* scores;
-
 	if (temp == 1)
-		return 1;
-	else if (temp == 2)
-		return -1;
-	else if (temp == 0)
-		return 0;
-
-	for (int i = 0; i < 9; i++)
 	{
-		if (darray.getArray()[i] == 0)
-		{
-			blanksNum++;
-		}
+		return 1;
+	}
+	else if (temp == 2)
+	{
+		return -1;
+	}
+	else if (temp == 0)
+	{
+		return 0;
 	}
 
-	possibles = new grid[blanksNum];
-	scores = new int[blanksNum];
-	
 	if (maximizing)
 	{
+		int value = -99;
+
 		for (int i = 0; i < 9; i++)
 		{
 			if (darray.getArray()[i] == 0)
 			{
 				darray.fill_value(1, i);
-				possibles[numPossibles].copy_array(darray.getArray());
+				value = max(value, minimax(darray, false));
 				darray.getArray()[i] = 0;
-				numPossibles++;
 			}
 		}
+
+		return value;
 	}
 	else
 	{
+		int value = 99;
+
 		for (int i = 0; i < 9; i++)
 		{
 			if (darray.getArray()[i] == 0)
 			{
 				darray.fill_value(2, i);
-				possibles[numPossibles].copy_array(darray.getArray());
+				value = min(value, minimax(darray, true));
 				darray.getArray()[i] = 0;
-				numPossibles++;
+			}
+		}
+
+		return value;
+	}
+}
+
+int bot::findMoveX(grid darray)
+{
+	int value = -99;
+	int maxValue = -99;
+	int bestMove = 0;
+	for (int i = 0; i < 9; i++)
+	{
+		if (darray.getArray()[i] == 0)
+		{
+			darray.fill_value(1, i);
+			int value = minimax(darray, false);
+			darray.getArray()[i] = 0;
+
+			if (value > maxValue)
+			{
+				bestMove = i;
+				maxValue = value;
 			}
 		}
 	}
 
-	if (maximizing)
-	{
-		for (int i = 0; i < blanksNum; i++)
-		{
-			scores[i] = minimax(possibles[i], false);
-		}
-		return scores[findMax(scores, blanksNum)];
-	}
-	else
-	{
-		for (int i = 0; i < blanksNum; i++)
-		{
-			scores[i] = minimax(possibles[i], true);
-		}
-		return scores[findMin(scores, blanksNum)];
-	}
+	return bestMove;
 }
 
-int bot::findMax(int arr[], int num)
+int bot::findMoveO(grid darray)
 {
-	int max = -99;
-	int maxInd;
-	for (int i = 0; i < num; i++)
-		if (max < arr[i])
+	int value = 99;
+	int minValue = 99;
+	int bestMove = 0;
+	for (int i = 0; i < 9; i++)
+	{
+		if (darray.getArray()[i] == 0)
 		{
-			max = arr[i];
-			maxInd = i;
+			darray.fill_value(2, i);
+			int value = minimax(darray, true);
+			darray.getArray()[i] = 0;
+
+			if (value < minValue)
+			{
+				bestMove = i;
+				minValue = value;
+			}
 		}
+	}
 
-	return maxInd;
-}
-
-int bot::findMin(int arr[], int num)
-{
-	int min = 99;
-	int minInd;
-	for (int i = 0; i < num; i++)
-		if (min > arr[i])
-		{
-			min = arr[i];
-			minInd = i;
-		}
-
-	return minInd;
+	return bestMove;
 }
